@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mi web</title>
+
+   <style>
+      body {
+         margin: 0 auto;
+         font-family: Arial, Helvetica, sans-serif;
+         width: 80%;
+         max-width: 1200px;
+      }
+
+      main {
+         display: grid;
+         grid-template-columns: repeat(auto-fit,
+               minmax(250px, 1fr));
+         gap: 16px;
+      }
+
+      article {
+         border: 1px solid #ccc;
+         padding: .7em;
+         margin-bottom: 15px;
+      }
+
+      img {
+         height: auto;
+         width: 320px;
+         max-width: 100%;
+      }
+
+      button {
+         margin-top: .7em;
+      }
+   </style>
+</head>
+
+<body>
+   <header>
+      <h1>Listado de Películas</h1>
+   </header>
+   <main>
+   </main>
+</body>
+
+<script type="module">
+   fetch('http://localhost:8080/movies')
+      .then(res => res.json())
+      .then(movies => {
+         const main = document.querySelector('main');
+         movies.forEach(movie => {
+            const movieElement = document.createElement('div');
+            movieElement.innerHTML = `
+               <article data-id="${movie.id}">
+                  <h2>${movie.title}</h2>
+                  <img src="${movie.poster}" alt="${movie.title}">
+                  <h4>${movie.director}</h4>
+                  <div>
+                     <span>Año: ${movie.year}</span> - <span>${movie.duration} mins.</span> 
+                  </div>
+
+                  <button>Eliminar</button>
+               </article>
+            `
+            main.appendChild(movieElement);
+         });
+      });
+
+   document.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') {
+         const article = e.target.closest('article');
+         const { id } = article.dataset;
+
+         fetch(`http://localhost:8080/movies/${id}`, {
+            method: 'DELETE'
+         })
+            .then(res => {
+               if (res.ok) {
+                  article.closest('div').remove();
+                  return res.json();
+               };
+            })
+            .then(res => console.log(res));
+      };
+   });
+</script>
+
+</html>

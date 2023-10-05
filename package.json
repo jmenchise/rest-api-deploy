@@ -1,0 +1,39 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "curso de NodeJS de midudev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmenchise/rest-api-deploy.git"
+  },
+  "keywords": [
+    "curso",
+    "node",
+    "nodejs",
+    "midudev"
+  ],
+  "author": "Joan Menchise",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmenchise/curso-node-midudev/issues"
+  },
+  "homepage": "https://github.com/jmenchise/curso-node-midudev#readme",
+  "dependencies": {
+    "express": "4.18.2",
+    "picocolors": "1.0.0",
+    "zod": "3.22.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1"
+  }
+}
